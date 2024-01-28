@@ -1,0 +1,12 @@
+#DataTables_Table_0_wrapper select {
+    cursor: pointer;
+}
+
+#DataTables_Table_0_wrapper select option {
+    background: rgba(0, 0, 0, 0.8);
+    color     : #fff;
+}
+
+#DataTables_Table_0_wrapper th {
+    white-space: nowrap;
+}
