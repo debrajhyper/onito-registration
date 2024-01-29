@@ -5,7 +5,7 @@ type PersonalDetails = {
     mobile: string,
     govtIssuedIDType: string,
     govtIssuedId: string
-}
+};
 
 type AddressDetails = {
     address: string,
@@ -13,4 +13,6 @@ type AddressDetails = {
     city: string,
     country: string,
     pincode: string
-}
+};
+
+type HandleSubmit = SubmitHandler<{ [x: string]: string | null | undefined;[x: number]: string | null | undefined; }>;

@@ -1,38 +1,26 @@
-import React, { useState } from 'react';
-import { TextField, Grid, Autocomplete, Typography, CircularProgress } from '@mui/material';
+import { useEffect, useState, useMemo, SyntheticEvent, SetStateAction } from 'react';
+import { Controller, useFormContext } from "react-hook-form";
+import { apiFetch } from '@Api/index';
+import { InputType, CountryType } from './types';
+import { EMPTY_STRING, NOT_FOUND_INPUT, SEARCH_INPUT } from '@Constants/index';
 import { debounce } from '@mui/material/utils';
-import { Controller, useForm, useFormContext } from "react-hook-form";
+import { TextField, Grid, Autocomplete, Typography, CircularProgress } from '@mui/material';
 
-interface PlaceType {
-    name: string;
-    region: string;
-    flag: string;
-}
+export function AutocompleteField({ name, label, type, ...rest }: InputType) {
+    const [value, setValue] = useState<CountryType | null>(null);
+    const [inputValue, setInputValue] = useState<string>(EMPTY_STRING);
+    const [options, setOptions] = useState<CountryType[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+    const { control } = useFormContext();
 
-export function AutocompleteField({ name, label, type, ...rest }: any) {
-    const { control, formState: { errors } } = useFormContext();
-    const [value, setValue] = useState<PlaceType | null>(null);
-    const [inputValue, setInputValue] = useState<string>('');
-    const [options, setOptions] = useState<PlaceType[]>([]);
-    const [loading, setLoading] = useState(false);
-
-    const fetchCountries = React.useMemo(
+    const fetchCountries = useMemo(
         () =>
             debounce(
                 async (newInputValue, callback) => {
-
                     try {
-                        const response = await fetch(`https://restcountries.com/v3.1/name/${newInputValue}`);
-                        if (!response.ok) throw new Error('Failed to fetch data');
-                        const data = await response.json();
-                        const countries = data.map((country: { name: { common: any; }; region: any; flags: { svg: any; }; }) => ({
-                            name: country.name.common,
-                            region: country.region,
-                            flag: country.flags.svg
-                        }));
+                        const countries = await apiFetch(newInputValue);
                         callback(countries);
                     } catch (error) {
-                        console.error('Error fetching data:', error);
                         callback([]);
                     } finally {
                         setLoading(false)
@@ -43,20 +31,13 @@ export function AutocompleteField({ name, label, type, ...rest }: any) {
         []
     );
 
-    React.useEffect(() => {
+    useEffect(() => {
         let active = true;
-
-        // if (!loading) {
-        //     return undefined;
-        // }
-
-        if (inputValue === '') {
+        if (inputValue === EMPTY_STRING) {
             setOptions(value ? [value] : []);
             return undefined;
         }
-
-        setLoading(true)
-
+        setLoading(true);
         fetchCountries(inputValue, (results: any) => {
             if (active) {
                 setOptions(value ? [...results] : results);
@@ -68,35 +49,32 @@ export function AutocompleteField({ name, label, type, ...rest }: any) {
         };
     }, [value, inputValue, fetchCountries]);
 
-    console.log('VALUE -> ', value, inputValue, options);
-
     return (
         <Controller
             name={name}
             control={control}
             render={({ field: { onChange }, fieldState: { invalid, error } }) => (
                 <Autocomplete
-                    getOptionLabel={(option: any) =>
+                    getOptionLabel={(option: CountryType | string) =>
                         typeof option === 'string' ? option : option?.name
                     }
-                    isOptionEqualToValue={(option, value) =>
-                        value === undefined || value === "" || option.name === value
+                    isOptionEqualToValue={(option: CountryType, value: CountryType) =>
+                        value === undefined || value === null || option?.name === value?.name
                     }
-                    filterOptions={(x) => x}
+                    filterOptions={(x: CountryType[]) => x}
                     options={options}
                     loading={loading}
                     autoComplete
                     includeInputInList
                     filterSelectedOptions
                     value={value}
-                    noOptionsText={inputValue === '' ? "Search for your country" : options.length === 0 ? "No Country found!" : null}
-                    // noOptionsText="No Country"
-                    onChange={(event: any, newValue: any) => {
+                    noOptionsText={inputValue === EMPTY_STRING ? SEARCH_INPUT : options?.length === 0 ? NOT_FOUND_INPUT : null}
+                    onChange={(_event: SyntheticEvent<Element, Event>, newValue: CountryType | null) => {
                         setOptions(newValue ? [newValue, ...options] : options);
                         setValue(newValue);
                         onChange(newValue?.name);
                     }}
-                    onInputChange={(event: any, newInputValue: React.SetStateAction<string>) => {
+                    onInputChange={(_event: SyntheticEvent<Element, Event>, newInputValue: SetStateAction<string>) => {
                         setInputValue(newInputValue);
                     }}
                     renderInput={(params) => (
@@ -104,31 +82,31 @@ export function AutocompleteField({ name, label, type, ...rest }: any) {
                             label={label}
                             type={type}
                             error={invalid}
-                            helperText={invalid ? error?.message : ""}
+                            helperText={invalid ? error?.message : EMPTY_STRING}
                             {...params}
-                            // {...field}
                             {...rest}
                             InputProps={{
                                 ...params.InputProps,
                                 endAdornment: (
-                                    <React.Fragment>
+                                    <>
                                         {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                                        {params.InputProps.endAdornment}
-                                    </React.Fragment>
+                                        {params?.InputProps?.endAdornment}
+                                    </>
                                 ),
                             }}
                         />
                     )}
-                    renderOption={(props, option: any) => {
+                    renderOption={(props, option: CountryType) => {
+                        const { name, region, flag } = option;
                         return (
-                            <Grid component='li' container alignItems="center" key={option?.name} {...props}>
+                            <Grid component='li' container alignItems="center" key={name} {...props}>
                                 <Grid item sx={{ display: 'flex', width: 44 }}>
                                     <img
                                         loading="lazy"
                                         width="30"
-                                        srcSet={option.flag}
-                                        src={option.flag}
-                                        alt={`${option.name}_flag`}
+                                        srcSet={flag}
+                                        src={flag}
+                                        alt={`${name}_flag`}
                                     />
                                 </Grid>
                                 <Grid
@@ -140,10 +118,10 @@ export function AutocompleteField({ name, label, type, ...rest }: any) {
                                     }}
                                 >
                                     <Typography>
-                                        {option?.name}
+                                        {name}
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
-                                        {option?.region}
+                                        {region}
                                     </Typography>
                                 </Grid>
                             </Grid>
@@ -152,6 +130,5 @@ export function AutocompleteField({ name, label, type, ...rest }: any) {
                 />
             )}
         />
-
     );
-}
+};

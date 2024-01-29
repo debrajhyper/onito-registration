@@ -32,7 +32,7 @@ export const FormModel = {
         govtIssuedIDType: {
             name: 'govtIssuedIDType',
             label: 'Govt Issued ID Type',
-            type:'text',
+            type: 'text',
             oneOfSelect: ['Aadhaar', 'PAN']
         },
         govtIssuedId: {

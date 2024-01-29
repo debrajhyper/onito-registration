@@ -1,2 +1,2 @@
-export * from './PersonalDetails'
-export * from './AddressDetails'
+export { PersonalDetails } from './PersonalDetails';
+export { AddressDetails } from './AddressDetails';

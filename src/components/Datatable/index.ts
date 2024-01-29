@@ -1,2 +1,2 @@
-export * from './DataTable'
-export * from './UserDetailsTable'
+export { DataTable } from './DataTable';
+export { UserDetailsTable } from './UserDetailsTable';

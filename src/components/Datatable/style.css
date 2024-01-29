@@ -10,3 +10,34 @@
 #DataTables_Table_0_wrapper th {
     white-space: nowrap;
 }
+
+#DataTables_Table_0_paginate {
+    color: black !important;
+}
+
+#DataTables_Table_0_wrapper #DataTables_Table_0_paginate .paginate_button {
+    background   : #90caf9 !important;
+    margin       : 0 2px;
+    border-radius: 4px !important;
+}
+
+#DataTables_Table_0_wrapper #DataTables_Table_0_paginate .paginate_button:hover {
+    background: #42a5f5 !important;
+}
+
+#DataTables_Table_0_wrapper #DataTables_Table_0_paginate .paginate_button.current {
+    background: #42a5f5 !important;
+    color     : white !important;
+}
+
+#DataTables_Table_0_wrapper #DataTables_Table_0_paginate .paginate_button.disabled {
+    background: #90caf9b6 !important;
+    cursor    : not-allowed;
+    ;
+}
+
+@media screen and (min-width: 1133px) {
+    #DataTables_Table_0_wrapper .dataTables_scroll .dataTables_scrollBody {
+        overflow-x: hidden !important;
+    }
+}

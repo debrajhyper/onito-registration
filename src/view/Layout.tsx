@@ -1,9 +1,8 @@
+import { Layout } from './types';
+import { theme } from './style';
 import { ThemeProvider, Container, CssBaseline, Box, Stack } from '@mui/material';
 
-import { theme } from './style';
-import { LayoutProps } from './types';
-
-export function Layout({ children }: LayoutProps) {
+export function Layout({ children }: Layout) {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -16,4 +15,4 @@ export function Layout({ children }: LayoutProps) {
             </Container>
         </ThemeProvider>
     );
-}
+};

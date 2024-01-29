@@ -16,6 +16,7 @@
 
     "baseUrl": ".",
     "paths": {
+      "@Api/*": ["src/api/*"],
       "@App/*": ["src/app/*"],
       "@Components/*": ["src/components/*"],
       "@Constants/*": ["src/constants/*"],
@@ -29,6 +30,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/components/Datatable/dataTables.bulma.min.js"],
+  "include": ["src", "src/*.d.ts", "**/*.ts", "**/*.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

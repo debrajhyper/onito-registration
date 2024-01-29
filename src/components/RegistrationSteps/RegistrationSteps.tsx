@@ -1,51 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import {
-    Stepper,
-    Step,
-    StepLabel,
-    Button,
-    Typography,
-    CircularProgress,
-    Stack,
-    Box,
-} from '@mui/material';
-// import { Formik, Form } from 'formik';
-import { FormProvider, useForm } from "react-hook-form";
-import { AddressDetails, PersonalDetails } from './Forms'
-import { yupResolver } from "@hookform/resolvers/yup";
-
-// import validationSchema from './FormModel/validationSchema';
-// import checkoutFormModel from './FormModel/checkoutFormModel';
-// import formInitialValues from './FormModel/formInitialValues';
-import { FormInitialValues, FormModel, yupValidation } from './FormModal';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addUserDetails } from 'src/services';
+import { yupResolver } from "@hookform/resolvers/yup";
+import { FormProvider, useForm } from "react-hook-form";
+import { NotFound } from './NotFound';
 import { FormSuccess } from './Success';
+import { addUserDetails } from 'src/services';
+import { AddressDetails, PersonalDetails } from './Forms'
+import { FormInitialValues, FormModel, yupValidation } from './FormModal';
+import { STEPPER_FIRST_STEP, STEPPER_SECOND_STEP } from '@Constants/index';
+import { Stepper, Step, StepLabel, Button, Stack, Box } from '@mui/material';
 
-//import useStyles from "./styles";
-
-const steps = ['Personal Details', 'Address Details'];
+const steps = [STEPPER_FIRST_STEP, STEPPER_SECOND_STEP];
 const { personalDetails, addressDetails } = FormModel;
 
-function _renderStepContent(step: number) {
+function renderStepContent(step: number) {
     switch (step) {
         case 0:
             return <PersonalDetails heading={steps[0]} personalDetails={personalDetails} />;
         case 1:
             return <AddressDetails heading={steps[1]} addressDetails={addressDetails} />;
         default:
-            return <div>Not Found</div>;
+            return <NotFound />;
     }
 }
 
-
-
-export default function RegistrationSteps() {
-    const [activeStep, setActiveStep] = useState(1);
+export function RegistrationSteps() {
+    const [activeStep, setActiveStep] = useState<number>(0);
     const dispatch = useDispatch();
-    const { register, formState: { errors }, reset } = useForm<PersonalDetails & AddressDetails>({
-        // resolver: yupResolver(schema)
-    });
     const currentValidationSchema = yupValidation[activeStep];
     const methods = useForm({
         shouldUnregister: false,
@@ -53,63 +34,34 @@ export default function RegistrationSteps() {
         resolver: yupResolver(currentValidationSchema),
         mode: "onChange"
     });
-    const { handleSubmit, trigger } = methods;
+    const { handleSubmit, trigger, reset } = methods;
+    const isLastStep = activeStep === steps?.length - 1;
 
-
-    const isLastStep = activeStep === steps.length - 1;
-
-    function _sleep(ms: number | undefined) {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-    }
-
-    async function _submitForm(values: any, actions: { setSubmitting: (arg0: boolean) => void; }) {
-        await _sleep(1000);
-        alert(JSON.stringify(values, null, 2));
-        actions.setSubmitting(false);
-
-        setActiveStep(activeStep + 1);
-    }
-
-    // function handleSubmit(values: any, actions: { setTouched?: any; setSubmitting: any; }) {
-    //     if (isLastStep) {
-    //         _submitForm(values, actions);
-    //     } else {
-    //         setActiveStep(activeStep + 1);
-    //         actions.setTouched({});
-    //         actions.setSubmitting(false);
-    //     }
-    // }
-
-    function _handleBack() {
-        // setActiveStep(activeStep - 1);
+    function handleBack() {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    }
+    };
 
-    // const onSubmit = (data: any) => console.log(data)
-    const onSubmitHandler = async (data: any) => {
-        console.log(data);
+    async function onSubmitHandler(data: HandleSubmit) {
         const isStepValid = await trigger();
         if (isStepValid) {
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        }
+        };
         if (isLastStep) {
-            dispatch(addUserDetails(data))
-            // reset()
-        }
-        // reset();
+            dispatch(addUserDetails(data));
+            reset();
+        };
     };
 
     useEffect(() => {
         let timer: number;
         if (activeStep === steps?.length) {
             timer = setTimeout(() => {
-                setActiveStep(1);
-            }, 6000);
+                setActiveStep(0);
+            }, 5000);
         }
 
         return () => clearTimeout(timer);
     }, [activeStep, steps?.length]);
-
 
     return (
         <Box px={{
@@ -121,25 +73,18 @@ export default function RegistrationSteps() {
         }}>
             <Stepper activeStep={activeStep}>
                 {steps.map((label) => (
-                    <Step key={label}>
+                    <Step key={label} sx={{
+                        "& .Mui-completed": {
+                            "&.MuiStepIcon-root": {
+                                color: "secondary.main",
+                            },
+                        }
+                    }}>
                         <StepLabel>{label}</StepLabel>
                     </Step>
                 ))}
             </Stepper>
-            <React.Fragment>
-                {/* {activeStep === steps.length ? (
-                    <CheckoutSuccess />
-                ) : (
-                    <Formik
-                        initialValues={formInitialValues}
-                        validationSchema={currentValidationSchema}
-                        onSubmit={_handleSubmit}
-                    >
-                        {({ isSubmitting }) => (
-                            
-                        )}
-                    </Formik>
-                )} */}
+            <>
                 <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight='45vh'>
                     {
                         activeStep === steps.length
@@ -149,10 +94,10 @@ export default function RegistrationSteps() {
                             : (
                                 <FormProvider {...methods}>
                                     <form onSubmit={handleSubmit(onSubmitHandler)}>
-                                        {_renderStepContent(activeStep)}
+                                        {renderStepContent(activeStep)}
                                         <Stack direction="row" justifyContent="flex-end" spacing={2} p={2} pr={0}>
                                             {activeStep !== 0 && (
-                                                <Button onClick={_handleBack}>Back</Button>
+                                                <Button onClick={handleBack}>Back</Button>
                                             )}
                                             <div>
                                                 <Button
@@ -160,11 +105,9 @@ export default function RegistrationSteps() {
                                                     type="submit"
                                                     variant="contained"
                                                     color="primary"
-                                                // disabled={methods.formState.isSubmitting}
                                                 >
                                                     {isLastStep ? 'Submit' : 'Next'}
                                                 </Button>
-                                                {/* {isSubmitting && <CircularProgress size={24} />} */}
                                             </div>
                                         </Stack>
                                     </form>
@@ -172,8 +115,7 @@ export default function RegistrationSteps() {
                             )
                     }
                 </Box>
-                {/* </Form> */}
-            </React.Fragment>
+            </>
         </Box>
     );
-}
+};

@@ -1,214 +1,23 @@
-import "datatables.net-dt/css/jquery.dataTables.min.css";
-import { DataTable } from "./DataTable";
 import { useSelector } from "react-redux";
-
-const data = [
-    {
-        id: "1",
-        name: "Tiger Nixon",
-        position: "System Architect",
-        salary: "$320,800",
-        start_date: "2011/04/25",
-        office: "Edinburgh",
-        extn: "5421",
-    },
-    {
-        id: "2",
-        name: "Garrett Winters",
-        position: "Accountant",
-        salary: "$170,750",
-        start_date: "2011/07/25",
-        office: "Tokyo",
-        extn: "8422",
-    },
-    {
-        id: "1",
-        name: "Tiger Nixon",
-        position: "System Architect",
-        salary: "$320,800",
-        start_date: "2011/04/25",
-        office: "Edinburgh",
-        extn: "5421",
-    },
-    {
-        id: "2",
-        name: "Garrett Winters",
-        position: "Accountant",
-        salary: "$170,750",
-        start_date: "2011/07/25",
-        office: "Tokyo",
-        extn: "8422",
-    },
-    {
-        id: "1",
-        name: "Tiger Nixon",
-        position: "System Architect",
-        salary: "$320,800",
-        start_date: "2011/04/25",
-        office: "Edinburgh",
-        extn: "5421",
-    },
-    {
-        id: "2",
-        name: "Garrett Winters",
-        position: "Accountant",
-        salary: "$170,750",
-        start_date: "2011/07/25",
-        office: "Tokyo",
-        extn: "8422",
-    },
-    {
-        id: "1",
-        name: "Tiger Nixon",
-        position: "System Architect",
-        salary: "$320,800",
-        start_date: "2011/04/25",
-        office: "Edinburgh",
-        extn: "5421",
-    },
-    {
-        id: "2",
-        name: "Garrett Winters",
-        position: "Accountant",
-        salary: "$170,750",
-        start_date: "2011/07/25",
-        office: "Tokyo",
-        extn: "8422",
-    },
-    {
-        id: "1",
-        name: "Tiger Nixon",
-        position: "System Architect",
-        salary: "$320,800",
-        start_date: "2011/04/25",
-        office: "Edinburgh",
-        extn: "5421",
-    },
-    {
-        id: "2",
-        name: "Garrett Winters",
-        position: "Accountant",
-        salary: "$170,750",
-        start_date: "2011/07/25",
-        office: "Tokyo",
-        extn: "8422",
-    },
-    {
-        id: "1",
-        name: "Tiger Nixon",
-        position: "System Architect",
-        salary: "$320,800",
-        start_date: "2011/04/25",
-        office: "Edinburgh",
-        extn: "5421",
-    },
-    {
-        id: "2",
-        name: "Garrett Winters",
-        position: "Accountant",
-        salary: "$170,750",
-        start_date: "2011/07/25",
-        office: "Tokyo",
-        extn: "8422",
-    },
-    {
-        id: "1",
-        name: "Tiger Nixon",
-        position: "System Architect",
-        salary: "$320,800",
-        start_date: "2011/04/25",
-        office: "Edinburgh",
-        extn: "5421",
-    },
-    {
-        id: "2",
-        name: "Garrett Winters",
-        position: "Accountant",
-        salary: "$170,750",
-        start_date: "2011/07/25",
-        office: "Tokyo",
-        extn: "8422",
-    },
-    {
-        id: "1",
-        name: "Tiger Nixon",
-        position: "System Architect",
-        salary: "$320,800",
-        start_date: "2011/04/25",
-        office: "Edinburgh",
-        extn: "5421",
-    },
-    {
-        id: "2",
-        name: "Garrett Winters",
-        position: "Accountant",
-        salary: "$170,750",
-        start_date: "2011/07/25",
-        office: "Tokyo",
-        extn: "8422",
-    },
-    {
-        id: "1",
-        name: "Tiger Nixon",
-        position: "System Architect",
-        salary: "$320,800",
-        start_date: "2011/04/25",
-        office: "Edinburgh",
-        extn: "5421",
-    },
-    {
-        id: "2",
-        name: "Garrett Winters",
-        position: "Accountant",
-        salary: "$170,750",
-        start_date: "2011/07/25",
-        office: "Tokyo",
-        extn: "8422",
-    },
-    {
-        id: "1",
-        name: "Tiger Nixon",
-        position: "System Architect",
-        salary: "$320,800",
-        start_date: "2011/04/25",
-        office: "Edinburgh",
-        extn: "5421",
-    },
-    {
-        id: "2",
-        name: "Garrett Winters",
-        position: "Accountant",
-        salary: "$170,750",
-        start_date: "2011/07/25",
-        office: "Tokyo",
-        extn: "8422",
-    },
-
-];
-
-//semanticui
+import "datatables.net-dt/css/jquery.dataTables.min.css";
+import { COLUMNS_ADDRESS_DATA, COLUMNS_ADDRESS_TITLE, COLUMNS_AGE_DATA, COLUMNS_AGE_TITLE, COLUMNS_CITY_DATA, COLUMNS_CITY_TITLE, COLUMNS_COUNTRY_DATA, COLUMNS_COUNTRY_TITLE, COLUMNS_GOVT_ISSUED_ID_DATA, COLUMNS_GOVT_ISSUED_ID_TITLE, COLUMNS_GOVT_ISSUED_ID_TYPE_DATA, COLUMNS_GOVT_ISSUED_ID_TYPE_TITLE, COLUMNS_MOBILE_DATA, COLUMNS_MOBILE_TITLE, COLUMNS_NAME_DATA, COLUMNS_NAME_TITLE, COLUMNS_PIN_CODE_DATA, COLUMNS_PIN_CODE_TITLE, COLUMNS_SEX_DATA, COLUMNS_SEX_TITLE, COLUMNS_STATE_DATA, COLUMNS_STATE_TITLE } from '@Constants/index';
+import { DataTable } from "./DataTable";
 
 const columns = [
-    { data: "name", title: "Name" },
-    { data: "age", title: "Age" },
-    { data: "sex", title: "Sex" },
-    { data: "mobile", title: "Mobile" },
-    { data: "govtIssuedIDType", title: "Govt Id Type" },
-    { data: "govtIssuedId", title: "Govt Id" },
-    { data: "address", title: "Address" },
-    { data: "state", title: "State" },
-    { data: "city", title: "City" },
-    { data: "country", title: "Country" },
-    { data: "pinCode", title: "Pincode" },
+    { data: COLUMNS_NAME_DATA, title: COLUMNS_NAME_TITLE },
+    { data: COLUMNS_AGE_DATA, title: COLUMNS_AGE_TITLE },
+    { data: COLUMNS_SEX_DATA, title: COLUMNS_SEX_TITLE },
+    { data: COLUMNS_MOBILE_DATA, title: COLUMNS_MOBILE_TITLE },
+    { data: COLUMNS_GOVT_ISSUED_ID_TYPE_DATA, title: COLUMNS_GOVT_ISSUED_ID_TYPE_TITLE },
+    { data: COLUMNS_GOVT_ISSUED_ID_DATA, title: COLUMNS_GOVT_ISSUED_ID_TITLE },
+    { data: COLUMNS_ADDRESS_DATA, title: COLUMNS_ADDRESS_TITLE },
+    { data: COLUMNS_STATE_DATA, title: COLUMNS_STATE_TITLE },
+    { data: COLUMNS_CITY_DATA, title: COLUMNS_CITY_TITLE },
+    { data: COLUMNS_COUNTRY_DATA, title: COLUMNS_COUNTRY_TITLE },
+    { data: COLUMNS_PIN_CODE_DATA, title: COLUMNS_PIN_CODE_TITLE },
 ];
 
-// useEffect(()=>{
-
-// }, [])
-
 export function UserDetailsTable() {
-    const userDetails = useSelector((state: any) => state.userDetails)
-
-    console.log('DATA_TABLE -> ',userDetails)
+    const userDetails = useSelector((state: InitialState) => state?.userDetails);
     return <DataTable data={userDetails} columns={columns} />;
 };

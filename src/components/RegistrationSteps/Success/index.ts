@@ -1,1 +1,1 @@
-export * from './FormSuccess'
+export { FormSuccess } from './FormSuccess';

@@ -1,13 +1,11 @@
-import RegistrationSteps from '@Components/RegistrationSteps/RegistrationSteps'
-import './App.css'
-import { Layout } from '@View/Layout'
-import { UserDetailsTable } from '@Components/Datatable'
+import { Layout } from '@View/index';
+import { RegistrationSteps, UserDetailsTable } from '@Components/index';
 
 export default function App() {
   return (
     <Layout>
       <RegistrationSteps />
-      <UserDetailsTable/>
+      <UserDetailsTable />
     </Layout>
-  )
-}
+  );
+};

@@ -1,3 +1,2 @@
-export * from './userDetailsStore'
-// export * from './userDetailsTypes'
-export * from './userDetailsSlice'
+export { addUserDetails } from './userDetailsSlice';
+export { userDetailsStore } from './userDetailsStore';

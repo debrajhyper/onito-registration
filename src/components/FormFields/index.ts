@@ -1,3 +1,3 @@
-export * from './InputField'
-export * from './SelectField'
-export * from './AutoCompeteField'
+export { InputField } from './InputField';
+export { SelectField } from './SelectField';
+export { AutocompleteField } from './AutoCompeteField';
