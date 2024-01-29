@@ -6,8 +6,7 @@ export function ErrorBoundary({ children }: { children: ReactNode }) {
     const [hasError, setHasError] = useState<boolean>(false);
 
     useEffect(() => {
-        const componentDidCatch = (errorEvent: Object) => {
-            // console.error(errorEvent.error, errorEvent.errorInfo);
+        const componentDidCatch = () => {
             setHasError(true);
         };
 
