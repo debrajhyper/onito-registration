@@ -45,12 +45,12 @@ Developed by <a href="https://github.com/debrajhyper">Debraj Karmakar</a>
 
 Clone the project
 ```
-  $git clone https://github.com/debrajhyper/1clock.git
+  $git clone https://github.com/debrajhyper/onito-registration.git
 ```
 
 Go to the project directory
 ```
-  cd 1clock
+  cd onito-registration
 ```
 
 Install dependencies
