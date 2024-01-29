@@ -1,0 +1,9 @@
+.not_include
+.vscode
+data
+node_modules
+.git
+.env
+.gitignore
+Dockerfile
+README.md
