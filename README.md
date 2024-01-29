@@ -1,30 +1,66 @@
-# React + TypeScript + Vite
+# Onito Registration App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🌐 Website : [onito-registration](https://onito-registration.vercel.app/)
 
-Currently, two official plugins are available:
+![onito-registration thumbnail](./public/template.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<br/>
 
-## Expanding the ESLint configuration
+## 👨🏻‍💻 Developer's Talk
+Developed by <a href="https://github.com/debrajhyper">Debraj Karmakar</a>
+<span style="display:inline-flex; justify-content:space-evenly; width:20%;">
+<a href="https://twitter.com/debraj_010">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" width="20px"/>
+</a>
+<a href="https://www.linkedin.com/in/debrajkarmakar010/">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="20px"/>
+</a>
+</span>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+>Just wrapped up <a href="https://onito-registration.vercel.app/">Onito Registration</a>, a React& Redux project. A compact journey with big learnings. From UI design to yup integration, faced challenges that shaped my skills as a front-end dev.
 
-- Configure the top-level `parserOptions` property like this:
+<br/>
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## 🚀 Tech Stack
+
+- HTML5
+- CSS3
+- Typescript
+- React
+- Redux Toolkit
+- React Redux
+- Material UI
+- React Hook Forms
+- Hook Form Resolver
+- Yup Validation
+- Datatables
+
+## 📃 APIs
+
+[Country Name](https://restcountries.com/#endpoints-name)
+
+<br/>
+
+## 🏃🏻‍♂️ Run Locally
+
+Clone the project
+```
+  $git clone https://github.com/debrajhyper/1clock.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Go to the project directory
+```
+  cd 1clock
+```
+
+Install dependencies
+```
+  $npm install
+```
+
+Start the server
+```
+  $npm start
+```
+
+<br/>
