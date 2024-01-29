@@ -1,2 +1,2 @@
 export { DataTable } from './DataTable';
-export { UserDetailsTable } from './UserDetailsTable';
+export { UserDetailsTable as default } from './UserDetailsTable';

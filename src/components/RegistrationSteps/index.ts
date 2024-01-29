@@ -1,1 +1,1 @@
-export { RegistrationSteps } from './RegistrationSteps';
+export { RegistrationSteps as default } from './RegistrationSteps';

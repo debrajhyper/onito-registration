@@ -8,5 +8,9 @@ export default defineConfig({
     host: true,
     port: 3030
   },
+  // optimizeDeps: {
+  //   include: ['react', 'react-dom'],
+  //   exclude: ['@components/*'],
+  // },
   plugins: [react(), tsconfigPaths()],
 })

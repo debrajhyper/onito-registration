@@ -57,14 +57,14 @@ export function RegistrationSteps() {
         if (activeStep === steps?.length) {
             timer = setTimeout(() => {
                 setActiveStep(0);
-            }, 5000);
+            }, 4000);
         }
 
         return () => clearTimeout(timer);
     }, [activeStep, steps?.length]);
 
     return (
-        <Box px={{
+        <Box width='100%' px={{
             xs: 2,
             sm: 5,
             md: 14,
@@ -85,7 +85,7 @@ export function RegistrationSteps() {
                 ))}
             </Stepper>
             <>
-                <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight='45vh'>
+                <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight='45vh' width='100%'>
                     {
                         activeStep === steps.length
                             ? (
