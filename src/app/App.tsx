@@ -1,25 +1,25 @@
 import { lazy, Suspense } from 'react';
 import { Layout } from '@View/index.ts';
 import { ErrorBoundary } from './ErrorBoundary';
-import { Box, CircularProgress } from '@mui/material';
 
 const RegistrationSteps = lazy(() => import('@Components/RegistrationSteps'));
 const UserDetailsTable = lazy(() => import('@Components/Datatable'));
+const CircularLoader = lazy(() => import('@Components/Loader'));
 
 export default function App() {
   return (
     <Layout>
       <ErrorBoundary>
-        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight='50vh'>
-          <Suspense fallback={<CircularProgress size={30} />}>
+        <div>
+          <Suspense fallback={<CircularLoader />}>
             <RegistrationSteps />
           </Suspense>
-        </Box>
-        <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight='30vh'>
-          <Suspense fallback={<CircularProgress size={30} />}>
+        </div>
+        <div>
+          <Suspense fallback={<CircularLoader />}>
             <UserDetailsTable />
           </Suspense>
-        </Box>
+        </div>
       </ErrorBoundary>
     </Layout >
   );

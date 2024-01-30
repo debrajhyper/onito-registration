@@ -1,0 +1,1 @@
+export { CircularLoader as default } from './CircularLoader';
