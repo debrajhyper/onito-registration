@@ -1,10 +1,10 @@
 import { lazy, Suspense } from 'react';
 import { Layout } from '@View/index.ts';
-import { ErrorBoundary } from './ErrorBoundary';
 
-const RegistrationSteps = lazy(() => import('@Components/RegistrationSteps'));
-const UserDetailsTable = lazy(() => import('@Components/Datatable'));
+const ErrorBoundary = lazy(() => import('@Components/Error'));
 const CircularLoader = lazy(() => import('@Components/Loader'));
+const UserDetailsTable = lazy(() => import('@Components/Datatable'));
+const RegistrationSteps = lazy(() => import('@Components/RegistrationSteps'));
 
 export default function App() {
   return (

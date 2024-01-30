@@ -1,8 +1,8 @@
-import { ReactNode, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Typography, Box } from "@mui/material";
 import ErrorIcon from '@mui/icons-material/Error';
 
-export function ErrorBoundary({ children }: { children: ReactNode }) {
+export function ErrorBoundary({ children }: ErrorBoundary) {
     const [hasError, setHasError] = useState<boolean>(false);
 
     useEffect(() => {

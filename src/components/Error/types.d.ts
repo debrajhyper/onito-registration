@@ -1,0 +1,1 @@
+type ErrorBoundary = { children: ReactNode };

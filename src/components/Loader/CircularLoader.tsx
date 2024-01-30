@@ -5,5 +5,5 @@ export function CircularLoader() {
         <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" minHeight='40vh'>
             <CircularProgress size={30} />
         </Box>
-    )
+    );
 };
