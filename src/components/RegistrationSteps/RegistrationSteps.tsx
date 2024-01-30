@@ -65,7 +65,7 @@ export function RegistrationSteps() {
 
     return (
         <Box width='100%' px={{
-            xs: 2,
+            xs: 0,
             sm: 5,
             md: 14,
             lg: 18,
